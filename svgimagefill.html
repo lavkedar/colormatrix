@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Change Fill Color of External SVG Image</title>
+    <script src="node_modules/@svgdotjs/svg.js/dist/svg.js"></script>
+    <script src="node_modules/@svgdotjs/svg.draggable.js/dist/svg.draggable.js"></script>
+
+    <script></script>
+  </head>
+  <body>
+    <div id="drawing"></div>
+
+    <script>
+      // Create an SVG.js drawing
+      const draw = SVG().addTo("#drawing").size(800, 800);
+
+      draw.svg(`<defs>
+    <filter id="customColor1">
+      <!-- Match hex color for #50A -->
+      <feColorMatrix
+        in="SourceGraphic"
+        type="matrix"
+        values="0 0 0 0 0.3333333333333333 0 0 0 0 0 0 0 0 0 0.6666666666666666 0 0 0 1 0"
+      ></feColorMatrix>
+    </filter>
+    
+    <filter id="customColor2">
+      <!-- Match hex color for #0F0 -->
+      <feColorMatrix
+        in="SourceGraphic"
+        type="matrix"
+        values="0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0"
+      ></feColorMatrix>
+    </filter>
+    <filter id="customColor3">
+      <!-- Match hex color for #0F0 -->
+      <feColorMatrix
+        in="SourceGraphic"
+        type="matrix"
+        values="1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0"
+      ></feColorMatrix>
+    </filter>
+    <filter id="colorChange">
+    <feColorMatrix
+      type = "matrix"
+      values="0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0"></feColorMatrix>
+  </filter>
+  </defs>`);
+
+      // Load the external SVG image
+      const image = draw.image("test.svg").attr({
+        x: 50,
+        y: 50,
+        width: 50,
+        height: 50,
+        fill: "green",
+      });
+      const image2 = draw.image("test2.svg").attr({
+        x: 100,
+        y: 100,
+        width: 50,
+        height: 50,
+        fill: "green",
+      });
+    </script>
+  </body>
+</html>
